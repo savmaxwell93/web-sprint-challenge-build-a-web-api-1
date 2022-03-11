@@ -21,5 +21,13 @@ router.get('/:id/actions', (req, res, next) => {
     console.log('get all actions by id')
 })
 
+router.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        customMessage: "Something broke inside the projects-router",
+        message: err.message,
+        stack: err.stack
+    })
+})
+
 
 module.exports = router;

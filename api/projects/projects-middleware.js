@@ -1,4 +1,33 @@
 const Project = require('./projects-model');
+const { projectSchema } = require('../schemas/index');
 
+function validateProjectId (req, res, next) {
+    Project.get(req.params.id)
+        .then(project => {
+            if (!project) {
+                res.status(404).json({ message: `Could not find project with id ${req.params.id}`})
+            } else {
+                req.project = project;
+                next()
+            }
+        })
+        .catch(next)
+}
 
-module.exports = {}
+function validateProject (req, res, next) {
+    projectSchema.validate(req.body)
+        .then(validated => {
+            if (!validated) {
+                res.status(400).json({ message: "Must provide name, description and completion status"})
+            } else {
+                req.body = validated;
+                next()
+            }
+        })
+        .catch(next)
+}
+
+module.exports = {
+    validateProjectId,
+    validateProject
+}
