@@ -8,22 +8,30 @@ const {
 } = require('./actions-middleware')
 const Action = require('./actions-model');
 
-router.get('/', async (req, res, next) => {
+router.get('/', (req, res, next) => {
     Action.get()
         .then(actions => {
             res.status(200).json(actions)
         })
         .catch(next)
 })
+
 router.get('/:id', validateActionId, (req, res, next) => {
-    console.log('get individual action by id')
+    Action.get(req.params.id)
+        .then(action => {
+            res.status(200).json(action)
+        })
+        .catch(next)
 })
+
 router.post('/', validateAction, (req, res, next) => {
     console.log('create new action')
 })
+
 router.put('/:id', validateActionId, validateAction, (req, res, next) => {
     console.log('update action by id')
 })
+
 router.delete('/:id', validateActionId, (req, res, next) => {
     console.log('delete action by id')
 })
