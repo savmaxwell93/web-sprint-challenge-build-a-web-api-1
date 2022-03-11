@@ -33,11 +33,19 @@ router.post('/', validateAction, (req, res, next) => {
 })
 
 router.put('/:id', validateActionId, validateAction, (req, res, next) => {
-    console.log('update action by id')
+    Action.update(req.params.id, req.body)
+        .then(updated => {
+            res.status(200).json(updated)
+        })
+        .catch(next)
 })
 
 router.delete('/:id', validateActionId, (req, res, next) => {
-    console.log('delete action by id')
+    Action.remove(req.params.id)
+        .then(deleted => {
+            res.status(200).json(deleted)
+        })
+        .catch(next)
 })
 
 router.use((err, req, res, next) => {
