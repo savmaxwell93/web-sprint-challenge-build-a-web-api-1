@@ -18,9 +18,9 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 
 ### Task 1: Project Set Up
 
-- [ ] Run `npm install` to install your dependencies.
-- [ ] Run tests locally executing `npm test`.
-- [ ] Reset the database to its original state executing `npm run resetdb`.
+- [x] Run `npm install` to install your dependencies.
+- [x] Run tests locally executing `npm test`.
+- [x] Reset the database to its original state executing `npm run resetdb`.
 
 ### Task 2: Project Requirements (MVP)
 
@@ -31,13 +31,13 @@ Your finished project must include all of the following requirements:
 A _"test"_ script already exists you can use to run tests against your code.
 A _"resetdb"_ script exists that allows you to reset the database to its original state.
 
-- [ ] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
-- [ ] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
-- [ ] Install _nodemon_ as a development dependency that would not be used in production.
+- [x] Write an _npm script_ named _"start"_ that uses `node` to run the API server.
+- [x] Write an _npm script_ named _"server"_ that uses `nodemon` to run the API server.
+- [x] Install _nodemon_ as a development dependency that would not be used in production.
 
 #### Environment Variables
 
-- [ ] Bring the port number from the `process.env` variable, falling back to `9000` if `process.env.PORT` is undefined **!!!**
+- [x] Bring the port number from the `process.env` variable, falling back to `9000` if `process.env.PORT` is undefined **!!!**
 
 #### Endpoints
 
@@ -147,7 +147,30 @@ We have provided test data for all the resources.
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. The core features of Node.js and Express and why they are useful.
+
+  Node.js allows both the client and server to use the same language, therefore, making it easier to share information between both machines. It also reduces multi-thread complexity by only using one and capitalizes on js asynchronous capabilities by offsetting its single-thread limitation. Express is useful because it allows the utilization of middleware to help expand its capabilities. 
+
 1. Understand and explain the use of Middleware.
+
+  Middleware are functions used in connecting multiple isolated systems to interact and perform tasks. Typically all the middleware in nodejs/expressjs have access to request, response and next objects.
+
 1. The basic principles of the REST architectural style.
+
+  REST is an agreed upon set of principles and constraints, essentially recommendations as opposed to a set standard. The basic principles are:
+    Everything is a resource
+    Every resource should be accessible from a unique URI
+    Resources can all have multiple representations
+    Managing resources happens via HTTP methods
+    Communication happens over a stateless protocol
+
 1. Understand and explain the use of Express Routers.
+
+  An Express Router behaves like a mini Express application. It can have its own Routing and Middleware, but must exist inside of an express application. Routers are a way to organize Express applications you write as separate pieces that can be composed together.
+
 1. Describe tooling used to manually test the correctness of an API.
+
+  Nodemon allows you to test your server constantly as opposed to having to restart it.
+  Postman allows you to check your end points and CRUD functionality.
+  Httpie is similar to Postman but runs completely in the terminal and allows you to see the full request in detail using --verbose
+  Eslint is able to id syntax errors.
+  SQLiteStudio allows you to look into your database to better see what data your end points will need to access
