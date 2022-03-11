@@ -30,15 +30,27 @@ router.post('/', validateProject, (req, res, next) => {
 })
 
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {
-    console.log('update project by id')
+    Project.update(req.params.id, req.body)
+        .then(updated => {
+            res.status(200).json(updated)
+        })
+        .catch(next)
 })
 
 router.delete('/:id', validateProjectId, (req, res, next) => {
-    console.log('delete project by id')
+    Project.remove(req.params.id)
+        .then(deleted => {
+            res.status(200).json(deleted)
+        })
+        .catch(next)
 })
 
 router.get('/:id/actions', validateProjectId, (req, res, next) => {
-    console.log('get all actions by id')
+    Project.getProjectActions(req.params.id)
+        .then(actions => {
+            res.status(200).json(actions)
+        })
+        .catch(next)
 })
 
 router.use((err, req, res, next) => {
