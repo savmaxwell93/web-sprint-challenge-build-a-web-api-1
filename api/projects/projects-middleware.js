@@ -14,17 +14,16 @@ function validateProjectId (req, res, next) {
         .catch(next)
 }
 
-function validateProject (req, res, next) {
-    projectSchema.validate(req.body)
-        .then(validated => {
-            if (!validated) {
-                res.status(400).json({ message: "Must provide name, description and completion status"})
-            } else {
-                req.body = validated;
-                next()
-            }
+async function validateProject (req, res, next) {
+    try {
+        const validated = await projectSchema.validate(req.body);
+            req.body = validated;
+            next();
+    } catch (err) {
+        res.status(400).json({
+            message: "Must provide name, description and completed status"
         })
-        .catch(next)
+    }
 }
 
 module.exports = {

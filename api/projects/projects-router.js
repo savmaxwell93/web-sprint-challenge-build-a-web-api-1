@@ -13,12 +13,20 @@ router.get('/', (req, res, next) => {
         .catch(next)
 })
 
-router.get('/:id', validateProjectId, (req, res, next) => {
-    console.log('get individual project by id')
+router.get('/:id', validateProjectId, async (req, res, next) => {
+    try {
+        res.status(200).json(req.project)
+    } catch (err) {
+        next(err)
+    }
 })
 
-router.post('/', (req, res, next) => {
-    console.log('create new project')
+router.post('/', validateProject, (req, res, next) => {
+    Project.insert(req.body)
+        .then(project => {
+            res.status(201).json(project)
+        })
+        .catch(next)
 })
 
 router.put('/:id', validateProjectId, validateProject, (req, res, next) => {

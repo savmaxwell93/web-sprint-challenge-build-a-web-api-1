@@ -14,17 +14,16 @@ function validateActionId (req, res, next) {
         .catch(next)
 }
 
-function validateAction (req, res, next) {
-    actionSchema.validate(req.body)
-        .then(validated => {
-            if (!validated) {
-                res.status(400).json({ message: "Must provide notes, description and completion project_id"})
-            } else {
-                req.body = validated;
-                next()
-            }
+async function validateAction (req, res, next) {
+    try {
+        const validated = await actionSchema.validate(req.body);
+            req.body = validated;
+            next();
+    } catch (err) {
+        res.status(400).json({
+            message: "Must provide notes, description and project_id"
         })
-        .catch(next)
+    }
 }
 
 module.exports = {
